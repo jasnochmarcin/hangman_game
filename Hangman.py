@@ -7,6 +7,13 @@ used_letters = []
 
 user_word = []
 
+difficulty = input("Select difficulty level. Press e, m or h. (easy[e], medium[m], hard[h])")
+if difficulty == "e":
+    no_of_tries = 8
+elif difficulty == "m":
+    no_of_tries = 5
+else:
+    no_of_tries = 3
 
 def find_indexes(word, letter):
     indexes = []
@@ -21,42 +28,41 @@ def find_indexes(word, letter):
 def show_state_of_game():
     print()
     print(user_word)
-    print('Pozostało prób:', no_of_tries)
-    print('Użyte litery:', used_letters)
+    print('Tries left:', no_of_tries)
+    print('Used letters:', used_letters)
     print()
 
 
 def restart():
-    result = input("\nCzy chcesz zagrać ponownie? [t/n] > ")
-    if result == 't':
+    result = input("\nWant to play again? [y/n] > ")
+    if result == 'y':
         os.system('python "D:/pycharm/Projekty/Hangman v2.py"')
     else:
-        print("\nDo następnego razu.")
+        print("\nUntil next time.")
         sys.exit(0)
-
 
 for _ in word:
     user_word.append("_")
 
 while True:
-    letter = input("Podaj literę: ")
+    letter = input("Enter the letter: ")
     used_letters.append(letter)
 
     found_indexes = find_indexes(word, letter)
 
     if len(found_indexes) == 0:
-        print("Nie ma takiej litery.")
+        print("There is no such letter.")
         no_of_tries -= 1
 
         if no_of_tries == 0:
-            print('Koniec gry...')
+            print('Game over...')
             restart()
     else:
         for index in found_indexes:
             user_word[index] = letter
 
         if "".join(user_word) == word:
-            print("Brawo, zgadłeś!")
+            print("Bravo, you guessed!")
             restart()
 
     show_state_of_game()
