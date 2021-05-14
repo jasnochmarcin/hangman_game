@@ -1,8 +1,10 @@
+from random import choice
 import sys
 import os
 
 no_of_tries = 5
-word = 'stetoskop'
+words_to_use = ['evening', 'expect', 'achieve', 'large', 'possible', 'craftsman', 'authority', 'coverage', 'guarantee', 'flour']
+word = choice(words_to_use)
 used_letters = []
 
 user_word = []
